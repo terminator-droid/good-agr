@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/goods_agr
+  jpa:
+    properties.hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      format_sql: true
+    open-in-view: false
+  mvc:
+    format:
+      date: iso
