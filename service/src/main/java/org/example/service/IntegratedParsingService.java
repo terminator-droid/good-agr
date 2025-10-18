@@ -37,10 +37,10 @@ public class IntegratedParsingService {
             List<Product> allProducts = new ArrayList<>();
 
             // Парсим Лавку
-            log.info("Parsing Lavka...");
-            List<Product> lavkaProducts = lavkaParserService.getProducts();
-            allProducts.addAll(lavkaProducts);
-            log.info("Lavka parsing completed: {} products", lavkaProducts.size());
+//            log.info("Parsing Lavka...");
+//            List<Product> lavkaProducts = lavkaParserService.getProducts();
+//            allProducts.addAll(lavkaProducts);
+//            log.info("Lavka parsing completed: {} products", lavkaProducts.size());
 
             // Парсим Самокат
             log.info("Parsing Samokat...");

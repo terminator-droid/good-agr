@@ -1,4 +1,4 @@
-package org.example.http;
+package org.example.http.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.entity.Product;

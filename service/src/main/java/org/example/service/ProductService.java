@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -56,7 +57,7 @@ public class ProductService {
      */
     public Page<Product> getProductsWithPagination(Pageable pageable) {
         List<Product> allProducts = getAllProducts();
-
+        Sort sort = pageable.getSort();
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), allProducts.size());
 

@@ -18,6 +18,10 @@ public class CartService {
     private static final BigDecimal SAMOKAT_DELIVERY_FEE = new BigDecimal("99.00");
     private static final BigDecimal LAVKA_DELIVERY_FEE = new BigDecimal("199.00");
 
+    public Cart saveCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
+
     public Cart getCart(Long cartId) {
         return cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Cart not found"));
     }

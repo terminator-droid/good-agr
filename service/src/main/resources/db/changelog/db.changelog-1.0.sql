@@ -1,5 +1,4 @@
---liquibase formatted sql
---changeSet dus:1
+
 
 CREATE TABLE IF NOT EXISTS users (
                                      id BIGSERIAL PRIMARY KEY,
@@ -9,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
---changeSet dus:2
 
 CREATE TABLE IF NOT EXISTS products (
                                         id BIGSERIAL PRIMARY KEY,
@@ -24,7 +22,7 @@ CREATE TABLE IF NOT EXISTS products (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
---changeSet dus:3
+
 
 CREATE TABLE IF NOT EXISTS carts (
                                      id BIGSERIAL PRIMARY KEY,
@@ -33,7 +31,6 @@ CREATE TABLE IF NOT EXISTS carts (
                                      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
---changeSet dus:4
 
 CREATE TABLE IF NOT EXISTS cart_items (
                                           id BIGSERIAL PRIMARY KEY,
@@ -45,7 +42,7 @@ CREATE TABLE IF NOT EXISTS cart_items (
     UNIQUE (cart_id, product_id)
     );
 
---changeSet dus:5
+
 
 CREATE INDEX idx_products_shop ON products(shop);
 CREATE INDEX idx_products_title ON products(title);
@@ -54,7 +51,6 @@ CREATE INDEX idx_products_updated_at ON products(updated_at);
 CREATE INDEX idx_cart_items_cart_id ON cart_items(cart_id);
 CREATE INDEX idx_carts_user_id ON carts(user_id);
 
---changeSet dus:6
 
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
@@ -64,18 +60,18 @@ RETURN NEW;
 END;
 $$ language 'plpgsql';
 
---changeSet dus:7
+
 
 CREATE TRIGGER update_products_updated_at BEFORE UPDATE ON products
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
---changeSet dus:8
+
 
 INSERT INTO users (username, email, password) VALUES
     ('admin', 'admin@example.com', '$2a$10$9XnhFQwWN9oS0SsrNGvHGeF8RuvlNMmvhDt9jVN8WBwMqNlEQnmKe')  -- password: admin
     ON CONFLICT (username) DO NOTHING;
 
---changeSet dus:9
+
 
 COMMENT ON TABLE products IS 'Товары, получаемые через парсинг Самокат и Лавка';
 COMMENT ON COLUMN products.ref IS 'URL ссылка на товар - уникальный идентификатор из парсеров';

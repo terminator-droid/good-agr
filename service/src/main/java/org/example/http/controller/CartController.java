@@ -9,6 +9,8 @@ import org.example.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
@@ -17,6 +19,11 @@ public class CartController {
     private final CartService cartService;
     private final ProductService productService;
 
+    @PostMapping("/create")
+    public ResponseEntity<Cart> createCart() {
+        Cart cart = Cart.builder().items(new ArrayList<>()).build();
+        return ResponseEntity.ok(cartService.saveCart(cart));
+    }
     @GetMapping("/{cartId}")
     public ResponseEntity<Cart> getCart(@PathVariable Long cartId) {
         return ResponseEntity.ok(cartService.getCart(cartId));
